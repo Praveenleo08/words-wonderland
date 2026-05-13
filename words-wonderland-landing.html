@@ -1,0 +1,2661 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Words Wonderland â€&ldquo; Magical Typing Adventure for Kids</title>
+  <link rel="icon" type="image/png" href="assests/logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --gold: #FFD700;
+      --gold-dark: #F5A623;
+      --pink: #FF6B9D;
+      --pink-light: #FFB3D1;
+      --purple: #9B59B6;
+      --purple-dark: #6C3483;
+      --purple-stone: #C39BD3;
+      --green: #2ECC71;
+      --green-dark: #27AE60;
+      --sky: #87CEEB;
+      --sky-dark: #3498DB;
+      --cream: #FFF9F0;
+      --orange: #FF8C42;
+      --teal: #1ABC9C;
+      --red: #E74C3C;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #0d0520;
+      color: #fff;
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' fill='%23FFD700' opacity='0.9'/%3E%3C/svg%3E") 12 12, auto;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ SPARKLE CANVAS â&rdquo;€â&rdquo;€â&rdquo;€ */
+    #sparkle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ NAV â&rdquo;€â&rdquo;€â&rdquo;€ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 60px;
+      background: rgba(8, 2, 22, 0.45);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    /* glass shimmer line on top of nav */
+    nav::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), rgba(255, 107, 157, 0.4), transparent);
+      animation: nav-shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes nav-shimmer {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, #FFD700, #FF6B9D, #9B59B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .nav-logo .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #FFD700, #FF6B9D);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      animation: logo-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes logo-pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      50% {
+        transform: scale(1.08);
+        box-shadow: 0 6px 32px rgba(255, 215, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      transition: color 0.3s, text-shadow 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #FFD700, #FF6B9D);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .nav-links a:not(.nav-cta):hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-links a:hover {
+      color: #FFD700;
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, #FFD700, #FF8C42);
+      color: #1a0a00 !important;
+      padding: 10px 26px;
+      border-radius: 50px;
+      font-weight: 900 !important;
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(255, 215, 0, 0.65) !important;
+      color: #1a0a00 !important;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ HERO â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 130px 40px 100px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 55%, rgba(155, 89, 182, 0.45) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 15%, rgba(255, 107, 157, 0.35) 0%, transparent 48%),
+        radial-gradient(ellipse at 55% 85%, rgba(52, 152, 219, 0.25) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 50%, rgba(108, 52, 131, 0.2) 0%, transparent 70%),
+        linear-gradient(160deg, #1e0640 0%, #0d0220 55%, #050112 100%);
+    }
+
+    /* animated mesh grid */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 215, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      animation: orb-drift 9s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(155, 89, 182, 0.3);
+      top: -150px;
+      left: -120px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 420px;
+      height: 420px;
+      background: rgba(255, 107, 157, 0.22);
+      bottom: -60px;
+      right: -100px;
+      animation-delay: -3s;
+    }
+
+    .orb-3 {
+      width: 300px;
+      height: 300px;
+      background: rgba(52, 152, 219, 0.22);
+      top: 28%;
+      left: 58%;
+      animation-delay: -5.5s;
+    }
+
+    .orb-4 {
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 215, 0, 0.12);
+      top: 65%;
+      left: 25%;
+      animation-delay: -2s;
+      filter: blur(50px);
+    }
+
+    @keyframes orb-drift {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(35px, -25px) scale(1.07);
+      }
+
+      66% {
+        transform: translate(-25px, 35px) scale(0.93);
+      }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* hero badge â€&ldquo; glassmorphic pill */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 215, 0, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-radius: 50px;
+      padding: 9px 22px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #FFD700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fade-up 0.8s ease both;
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      animation: badge-shine 3s ease-in-out infinite;
+    }
+
+    @keyframes badge-shine {
+
+      0%,
+      100% {
+        left: -100%;
+      }
+
+      50% {
+        left: 140%;
+      }
+    }
+
+    .hero-badge .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFD700;
+      box-shadow: 0 0 8px #FFD700;
+      animation: dot-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes dot-pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+      }
+    }
+
+    .hero-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(3.2rem, 6.5vw, 6rem);
+      line-height: 1.0;
+      margin-bottom: 24px;
+      animation: fade-up 0.8s 0.15s ease both;
+    }
+
+    .hero-title .line1 {
+      display: block;
+      background: linear-gradient(135deg, #FFE566 0%, #FFD700 40%, #FF8C42 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+      animation: fade-up 0.8s 0.15s ease both, title-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes title-glow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 45px rgba(255, 215, 0, 0.9));
+      }
+    }
+
+    .hero-title .line2 {
+      display: block;
+      background: linear-gradient(135deg, #FF6B9D 0%, #C39BD3 50%, #87CEEB 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fade-up 0.8s 0.25s ease both, gradient-shift 5s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* subtitle kicker above title */
+    .hero-kicker {
+      display: block;
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(195, 155, 211, 0.7);
+      margin-bottom: 8px;
+      animation: fade-up 0.8s 0.05s ease both;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 480px;
+      margin-bottom: 40px;
+      animation: fade-up 0.8s 0.35s ease both;
+    }
+
+    /* trust pills row */
+    .hero-trust {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      animation: fade-up 0.8s 0.5s ease both;
+    }
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fade-up 0.8s 0.6s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #FFD700, #FF8C42);
+      color: #1a0800;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.15rem;
+      padding: 16px 36px;
+      border-radius: 60px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 30px rgba(255, 215, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
+      border-radius: 60px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.65);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      padding: 14px 30px;
+      border-radius: 60px;
+      text-decoration: none;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: background 0.3s, border-color 0.3s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 215, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ HERO VISUAL â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fade-up 0.8s 0.2s ease both;
+    }
+
+    .game-screen-mockup {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 2px rgba(255, 215, 0, 0.3),
+        0 0 0 8px rgba(155, 89, 182, 0.15),
+        0 30px 80px rgba(0, 0, 0, 0.7),
+        0 0 60px rgba(255, 215, 0, 0.15);
+      animation: float-screen 4s ease-in-out infinite;
+    }
+
+    @keyframes float-screen {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    .screen-header {
+      background: linear-gradient(135deg, #2c1654, #4a1480);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .screen-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .screen-body {
+      background: linear-gradient(160deg, #1e0f3a, #2d1a5e, #1a0f30);
+      padding: 30px 28px 28px;
+      min-height: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screen-arch {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 85%;
+      border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+      background: linear-gradient(180deg, rgba(134, 63, 217, 0.3), transparent);
+      border: 3px solid rgba(195, 155, 211, 0.4);
+      border-bottom: none;
+    }
+
+    .screen-title {
+      font-family: 'Fredoka One', cursive;
+      text-align: center;
+      font-size: 1.4rem;
+      color: #FFD700;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      position: relative;
+      z-index: 2;
+      margin-bottom: 12px;
+    }
+
+    .screen-word {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .letter-box {
+      width: 40px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: #fff;
+      animation: letter-pop 0.5s ease both;
+    }
+
+    .letter-box.typed {
+      background: linear-gradient(135deg, #27AE60, #1ABC9C);
+      box-shadow: 0 4px 16px rgba(39, 174, 96, 0.5);
+    }
+
+    .letter-box.current {
+      background: linear-gradient(135deg, #FFD700, #FF8C42);
+      box-shadow: 0 4px 16px rgba(255, 215, 0, 0.6);
+      animation: letter-pulse 0.8s ease-in-out infinite;
+    }
+
+    .letter-box.upcoming {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes letter-pop {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes letter-pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .screen-stats {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+      margin-top: 20px;
+    }
+
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #FFD700;
+    }
+
+    /* Floating characters */
+    .char {
+      position: absolute;
+      font-size: 2.8rem;
+      animation: char-float 3s ease-in-out infinite;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+      z-index: 10;
+    }
+
+    .char-owl {
+      top: -20px;
+      left: -40px;
+      animation-delay: 0s;
+    }
+
+    .char-penguin {
+      bottom: -20px;
+      left: -20px;
+      animation-delay: -1s;
+    }
+
+    .char-fox {
+      bottom: -10px;
+      right: -30px;
+      animation-delay: -2s;
+    }
+
+    @keyframes char-float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+
+      50% {
+        transform: translateY(-14px) rotate(5deg);
+      }
+    }
+
+    /* floating stars */
+    .star-float {
+      position: absolute;
+      pointer-events: none;
+      animation: star-spin-float 4s ease-in-out infinite;
+      font-size: 1.2rem;
+    }
+
+    @keyframes star-spin-float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ SECTION COMMON â&rdquo;€â&rdquo;€â&rdquo;€ */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #FFD700;
+      margin-bottom: 14px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ STATS STRIP â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .stats-strip {
+      padding: 60px 40px;
+      background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(255, 107, 157, 0.1));
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .stats-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-family: 'Fredoka One', cursive;
+      font-size: 3rem;
+      color: #FFD700;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ FEATURES â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .features {
+      padding: 110px 40px;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .features-header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      background: var(--card-glow, transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 215, 0, 0.25);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card:nth-child(1) {
+      --card-glow: radial-gradient(ellipse at top left, rgba(255, 215, 0, 0.08), transparent 60%);
+    }
+
+    .feature-card:nth-child(2) {
+      --card-glow: radial-gradient(ellipse at top left, rgba(255, 107, 157, 0.08), transparent 60%);
+    }
+
+    .feature-card:nth-child(3) {
+      --card-glow: radial-gradient(ellipse at top left, rgba(52, 152, 219, 0.08), transparent 60%);
+    }
+
+    .feature-card:nth-child(4) {
+      --card-glow: radial-gradient(ellipse at top left, rgba(46, 204, 113, 0.08), transparent 60%);
+    }
+
+    .feature-card:nth-child(5) {
+      --card-glow: radial-gradient(ellipse at top left, rgba(155, 89, 182, 0.08), transparent 60%);
+    }
+
+    .feature-card:nth-child(6) {
+      --card-glow: radial-gradient(ellipse at top left, rgba(255, 140, 66, 0.08), transparent 60%);
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 22px;
+      background: var(--icon-bg);
+      box-shadow: 0 8px 24px var(--icon-shadow);
+    }
+
+    .feature-card:nth-child(1) .feature-icon {
+      --icon-bg: linear-gradient(135deg, #FFD700, #FF8C42);
+      --icon-shadow: rgba(255, 215, 0, 0.35);
+    }
+
+    .feature-card:nth-child(2) .feature-icon {
+      --icon-bg: linear-gradient(135deg, #FF6B9D, #C39BD3);
+      --icon-shadow: rgba(255, 107, 157, 0.35);
+    }
+
+    .feature-card:nth-child(3) .feature-icon {
+      --icon-bg: linear-gradient(135deg, #3498DB, #1ABC9C);
+      --icon-shadow: rgba(52, 152, 219, 0.35);
+    }
+
+    .feature-card:nth-child(4) .feature-icon {
+      --icon-bg: linear-gradient(135deg, #2ECC71, #1ABC9C);
+      --icon-shadow: rgba(46, 204, 113, 0.35);
+    }
+
+    .feature-card:nth-child(5) .feature-icon {
+      --icon-bg: linear-gradient(135deg, #9B59B6, #6C3483);
+      --icon-shadow: rgba(155, 89, 182, 0.35);
+    }
+
+    .feature-card:nth-child(6) .feature-icon {
+      --icon-bg: linear-gradient(135deg, #FF8C42, #FF6B9D);
+      --icon-shadow: rgba(255, 140, 66, 0.35);
+    }
+
+    .feature-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .feature-desc {
+      font-size: 0.93rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.65;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ GAME MODES â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .modes {
+      padding: 110px 40px;
+    }
+
+    .modes-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .modes-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .mode-card {
+      border-radius: 28px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .mode-card:hover {
+      transform: translateY(-6px) scale(1.01);
+    }
+
+    .mode-words {
+      background: linear-gradient(135deg, #1a3d2b 0%, #0d2318 100%);
+      border: 2px solid rgba(255, 215, 0, 0.35);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 215, 0, 0.15);
+    }
+
+    .mode-sentences {
+      background: linear-gradient(135deg, #2d1054 0%, #1a0835 100%);
+      border: 2px solid rgba(255, 107, 157, 0.35);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 107, 157, 0.15);
+    }
+
+    .mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    .mode-words .mode-badge {
+      background: rgba(255, 215, 0, 0.15);
+      color: #FFD700;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .mode-sentences .mode-badge {
+      background: rgba(255, 107, 157, 0.15);
+      color: #FF6B9D;
+      border: 1px solid rgba(255, 107, 157, 0.3);
+    }
+
+    .mode-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .mode-words .mode-title {
+      color: #FFD700;
+    }
+
+    .mode-sentences .mode-title {
+      color: #FF6B9D;
+    }
+
+    .mode-desc {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .mode-perks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mode-perks li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+    }
+
+    .perk-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .mode-words .perk-dot {
+      background: #FFD700;
+    }
+
+    .mode-sentences .perk-dot {
+      background: #FF6B9D;
+    }
+
+    .mode-decoration {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      font-size: 4rem;
+      opacity: 0.15;
+      animation: char-float 3s ease-in-out infinite;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ LEVELS â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .levels {
+      padding: 110px 40px;
+    }
+
+    .levels-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .levels-row {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .level-card {
+      border-radius: 24px;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .level-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .level-easy {
+      background: linear-gradient(160deg, #0d2b1a, #163a24);
+      border: 2px solid rgba(46, 204, 113, 0.4);
+      box-shadow: 0 20px 50px rgba(46, 204, 113, 0.1);
+    }
+
+    .level-medium {
+      background: linear-gradient(160deg, #2b1a06, #3a2410);
+      border: 2px solid rgba(255, 215, 0, 0.4);
+      box-shadow: 0 20px 50px rgba(255, 215, 0, 0.1);
+      transform: scale(1.04);
+    }
+
+    .level-medium:hover {
+      transform: scale(1.04) translateY(-10px);
+    }
+
+    .level-hard {
+      background: linear-gradient(160deg, #1a0a2b, #24103a);
+      border: 2px solid rgba(155, 89, 182, 0.4);
+      box-shadow: 0 20px 50px rgba(155, 89, 182, 0.1);
+    }
+
+    .level-emblem {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+
+    .level-easy .level-emblem {
+      background: linear-gradient(135deg, #27AE60, #2ECC71);
+      box-shadow: 0 8px 30px rgba(46, 204, 113, 0.4);
+    }
+
+    .level-medium .level-emblem {
+      background: linear-gradient(135deg, #F39C12, #FFD700);
+      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+    }
+
+    .level-hard .level-emblem {
+      background: linear-gradient(135deg, #8E44AD, #9B59B6);
+      box-shadow: 0 8px 30px rgba(155, 89, 182, 0.5);
+    }
+
+    .level-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .level-easy .level-name {
+      color: #2ECC71;
+    }
+
+    .level-medium .level-name {
+      color: #FFD700;
+    }
+
+    .level-hard .level-name {
+      color: #C39BD3;
+    }
+
+    .level-sub {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .level-desc {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+    }
+
+    .level-tag {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .level-easy .level-tag {
+      background: rgba(46, 204, 113, 0.15);
+      color: #2ECC71;
+    }
+
+    .level-medium .level-tag {
+      background: rgba(255, 215, 0, 0.15);
+      color: #FFD700;
+    }
+
+    .level-hard .level-tag {
+      background: rgba(155, 89, 182, 0.15);
+      color: #C39BD3;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ CHARACTERS SECTION â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .characters {
+      padding: 80px 40px;
+    }
+
+    .characters-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(155, 89, 182, 0.12), rgba(255, 107, 157, 0.08));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 32px;
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .char-showcase {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .char-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      width: 130px;
+      transition: transform 0.3s;
+    }
+
+    .char-card:hover {
+      transform: translateY(-8px) rotate(3deg);
+    }
+
+    .char-card:nth-child(2):hover {
+      transform: translateY(-8px) rotate(-3deg);
+    }
+
+    .char-emoji {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 10px;
+      animation: char-float 3s ease-in-out infinite;
+    }
+
+    .char-card:nth-child(2) .char-emoji {
+      animation-delay: -1s;
+    }
+
+    .char-card:nth-child(3) .char-emoji {
+      animation-delay: -2s;
+    }
+
+    .char-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: #FFD700;
+    }
+
+    .char-role {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 600;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ DEVELOPER â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .developer {
+      padding: 110px 40px;
+    }
+
+    .developer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .dev-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, #FFD700, #FF6B9D, #9B59B6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+      animation: dev-spin 6s linear infinite;
+    }
+
+    @keyframes dev-spin {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+      }
+
+      33% {
+        box-shadow: 0 8px 30px rgba(255, 107, 157, 0.4);
+      }
+
+      66% {
+        box-shadow: 0 8px 30px rgba(155, 89, 182, 0.4);
+      }
+    }
+
+    .dev-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+      color: #FFD700;
+      margin-bottom: 6px;
+    }
+
+    .dev-role {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .dev-quote {
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.75);
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .dev-tags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .dev-tag {
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ DOWNLOAD â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .download {
+      padding: 120px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(155, 89, 182, 0.3) 0%, rgba(13, 5, 32, 0.95) 70%);
+    }
+
+    .download-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .download-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #FFD700, #FF6B9D);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .download-desc {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .download-btns {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 18px 30px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s;
+      min-width: 200px;
+      backdrop-filter: blur(10px);
+    }
+
+    .dl-btn:hover {
+      background: rgba(255, 215, 0, 0.12);
+      border-color: rgba(255, 215, 0, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 215, 0, 0.2);
+    }
+
+    .dl-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .dl-text {
+      text-align: left;
+    }
+
+    .dl-sub {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+    }
+
+    .dl-platform {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.25rem;
+      color: #FFD700;
+      display: block;
+    }
+
+    .dl-btn-main {
+      background: linear-gradient(135deg, #FFD700, #FF8C42);
+      border-color: transparent;
+      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.35);
+    }
+
+    .dl-btn-main .dl-sub {
+      color: rgba(26, 8, 0, 0.6);
+    }
+
+    .dl-btn-main .dl-platform {
+      color: #1a0800;
+    }
+
+    .dl-btn-main:hover {
+      background: linear-gradient(135deg, #ffe040, #ff9d55);
+      border-color: transparent;
+      box-shadow: 0 14px 40px rgba(255, 215, 0, 0.55);
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ PORTFOLIO BUTTON â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .portfolio-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 36px;
+      padding: 14px 36px;
+      border-radius: 60px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(195, 155, 211, 0.4);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      box-shadow: 0 4px 24px rgba(155, 89, 182, 0.2);
+    }
+
+    .portfolio-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(155, 89, 182, 0.25), rgba(255, 107, 157, 0.15));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .portfolio-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      animation: port-shine 3.5s ease-in-out infinite;
+    }
+
+    @keyframes port-shine {
+
+      0%,
+      100% {
+        left: -100%;
+      }
+
+      55% {
+        left: 140%;
+      }
+    }
+
+    .portfolio-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      border-color: rgba(195, 155, 211, 0.8);
+      box-shadow: 0 12px 36px rgba(155, 89, 182, 0.45);
+    }
+
+    .portfolio-btn:hover::before {
+      opacity: 1;
+    }
+
+    .portfolio-btn .port-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #9B59B6, #FF6B9D);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(155, 89, 182, 0.5);
+      animation: port-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes port-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 12px rgba(155, 89, 182, 0.5);
+      }
+
+      50% {
+        box-shadow: 0 4px 20px rgba(255, 107, 157, 0.7);
+      }
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ WEBGL MODAL â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .webgl-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(5, 1, 18, 0.92);
+      backdrop-filter: blur(20px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .webgl-modal-overlay.open {
+      display: flex;
+    }
+
+    .webgl-modal {
+      position: relative;
+      width: min(96vw, 1000px);
+      background: linear-gradient(160deg, #1a0640, #0d0220);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 24px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 60px rgba(155, 89, 182, 0.2);
+      overflow: hidden;
+    }
+
+    .webgl-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .webgl-modal-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #FFD700, #FF6B9D);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .webgl-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .webgl-close-btn:hover {
+      background: rgba(255, 100, 100, 0.25);
+      color: #fff;
+    }
+
+    .webgl-frame-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 60%;
+      background: #0a0118;
+    }
+
+    .webgl-frame-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .webgl-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      pointer-events: none;
+    }
+
+    .webgl-loading-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 215, 0, 0.15);
+      border-top-color: #FFD700;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .webgl-loading p {
+      font-family: 'Fredoka One', cursive;
+      color: rgba(255, 215, 0, 0.7);
+      font-size: 1rem;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ GAME SECTION â&rdquo;€â&rdquo;€â&rdquo;€ */
+    #game-section {
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+      /* Smooth slide-down reveal */
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.5s ease,
+                  padding 0.5s ease;
+      pointer-events: none;
+    }
+
+    #game-section.game-open {
+      max-height: 900px;   /* large enough for the scaled game */
+      opacity: 1;
+      padding: 40px 40px 70px;
+      pointer-events: auto;
+    }
+
+    .game-embed-wrapper {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: rgba(13, 5, 32, 0.6);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow:
+        0 0 0 1px rgba(255, 215, 0, 0.06),
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      position: relative;
+    }
+
+    /* subtle top-edge rainbow shimmer */
+    .game-embed-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 24px 24px 0 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.7), rgba(255, 107, 157, 0.6), rgba(155, 89, 182, 0.6), transparent);
+      animation: game-shimmer 4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes game-shimmer {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
+    }
+
+    /* Fullscreen button */
+    .game-fullscreen-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .game-fullscreen-btn:hover {
+      background: rgba(255, 215, 0, 0.2);
+      border-color: rgba(255, 215, 0, 0.5);
+      color: #FFD700;
+      transform: scale(1.1);
+    }
+    .game-fullscreen-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* Responsive iframe scaler â€&ldquo; Unity renders at native 1920Ã&mdash;1080, we scale it down */
+    .game-iframe-container {
+      position: relative;
+      width: 100%;
+      /* height set dynamically by JS to maintain 16:9 */
+      overflow: hidden;
+      border-radius: 12px;
+      background: #231F20;
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    /* â&rdquo;€â&rdquo;€ Fullscreen: container fills the entire viewport â&rdquo;€â&rdquo;€ */
+    .game-iframe-container:fullscreen {
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0 !important;
+      background: #000 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .game-iframe-container:-webkit-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0 !important;
+      background: #000 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .game-iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      /* transform-origin top left â€&ldquo; JS overrides with scale & offset in fullscreen */
+      transform-origin: top left;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      #game-section.game-open { padding: 24px 16px 50px; }
+      #game-section.game-open { max-height: 700px; }
+      .game-embed-wrapper { padding: 14px; }
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ FOOTER â&rdquo;€â&rdquo;€â&rdquo;€ */
+    footer {
+      background: #07010f;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 50px 60px 36px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, #FFD700, #FF6B9D);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #FFD700;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ SCROLLREVEAL HELPER â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ DIVIDER â&rdquo;€â&rdquo;€â&rdquo;€ */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ RESPONSIVE â&rdquo;€â&rdquo;€â&rdquo;€ */
+    @media (max-width: 900px) {
+      nav {
+        padding: 14px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+      }
+
+      .hero-desc {
+        margin: 0 auto 40px;
+      }
+
+      .hero-btns {
+        justify-content: center;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .modes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .levels-row {
+        grid-template-columns: 1fr;
+      }
+
+      .level-medium {
+        transform: none;
+      }
+
+      .level-medium:hover {
+        transform: translateY(-10px);
+      }
+
+      .characters-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .container,
+      .features,
+      .modes,
+      .levels,
+      .characters,
+      .developer,
+      .download {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      footer {
+        padding: 40px 24px 28px;
+      }
+
+      nav {
+        padding: 14px 20px;
+      }
+
+      .stats-strip {
+        padding: 50px 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .download-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dl-btn {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="sparkle-canvas"></canvas>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ NAV â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="assests/logo1.png" alt="Words Wonderland Logo" class="logo-icon" style="object-fit:contain;padding:4px;">
+      Words Wonderland
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#modes">Game Modes</a></li>
+      <li><a href="#levels">Levels</a></li>
+      <li><a href="#developer">Developer</a></li>
+      <li><a class="nav-cta" id="nav-play-btn" href="https://praveenleo.itch.io/words-wonderland" target="_blank" rel="noopener" style="text-decoration:none;">&#11015; Download</a></li>
+    </ul>
+  </nav>
+
+  <!-- placeholder removed; game-section is now below the hero -->
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ HERO â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+
+    <!-- floating star decorations -->
+    <span class="star-float" style="top:15%;left:8%;animation-delay:0s;">&#11088;</span>
+    <span class="star-float" style="top:25%;right:12%;animation-delay:-1.5s;font-size:1.8rem;">&#10024;</span>
+    <span class="star-float" style="bottom:20%;left:14%;animation-delay:-3s;font-size:0.9rem;">&#127775;</span>
+    <span class="star-float" style="top:60%;right:8%;animation-delay:-2s;">&#128171;</span>
+    <span class="star-float" style="bottom:30%;right:20%;animation-delay:-0.5s;font-size:0.85rem;">&#11088;</span>
+    <span class="star-float" style="top:40%;left:3%;animation-delay:-4s;font-size:1rem;">&#10022;</span>
+
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          &#127918; Educational Typing Game for Kids
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-kicker">&#10022; Magical Adventure &#10022;</span>
+          <span class="line1">Words</span>
+          <span class="line2">Wonderland</span>
+        </h1>
+        <p class="hero-desc">
+          Step into a magical fantasy garden where typing becomes an adventure! Help your little ones build vocabulary,
+          boost typing speed, and have a blast with adorable animal companions.
+        </p>
+        <div class="hero-trust">
+          <span class="trust-pill">ðŸ†&ldquo; 100% Free</span>
+          <span class="trust-pill">&#128737; Kid-Safe</span>
+          <span class="trust-pill">&#128683; No Ads</span>
+          <span class="trust-pill">&#11088; 500+ Words</span>
+        </div>
+        <div class="hero-btns">
+          <button id="hero-play-btn" class="btn-primary" style="border:none;">
+            <span>&#127918;</span> Play Online
+          </button>
+          <a href="https://praveenleo.itch.io/words-wonderland" target="_blank" rel="noopener" class="btn-secondary">
+            <span>&#127922;</span> itch.io Page
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <!-- floating characters -->
+        <span class="char char-owl">&#129497;</span>
+        <span class="char char-penguin">&#128039;</span>
+        <span class="char char-fox">&#129418;</span>
+
+        <div class="game-screen-mockup">
+          <div class="screen-header">
+            <div class="screen-dot" style="background:#FF5F57"></div>
+            <div class="screen-dot" style="background:#FEBC2E"></div>
+            <div class="screen-dot" style="background:#28C840"></div>
+            <span
+              style="flex:1;text-align:center;font-family:'Fredoka One',cursive;font-size:0.85rem;color:rgba(255,255,255,0.5);">Words
+              Wonderland</span>
+          </div>
+          <div class="screen-body">
+            <div class="screen-arch"></div>
+            <div class="screen-title">&#10024; Type the Word! &#10024;</div>
+            <div class="screen-word">
+              <div class="letter-box typed">W</div>
+              <div class="letter-box typed">O</div>
+              <div class="letter-box typed">N</div>
+              <div class="letter-box current">D</div>
+              <div class="letter-box upcoming">E</div>
+              <div class="letter-box upcoming">R</div>
+            </div>
+            <div class="screen-stats">
+              <div class="stat-pill">&#9201; 00:45</div>
+              <div class="stat-pill">&#127775; Score: 320</div>
+              <div class="stat-pill">ðŸ&rdquo;¥ Ã&mdash;3 Combo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ GAME SECTION (below hero, smooth slide-down) â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <section id="game-section">
+    <div class="game-embed-wrapper">
+      <button class="game-fullscreen-btn" id="game-fullscreen-btn" title="Fullscreen">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h5v2H5v3H3V3zm13 0h5v5h-2V5h-3V3zM3 16h2v3h3v2H3v-5zm16 3h-3v2h5v-5h-2v3z"/></svg>
+      </button>
+      <div class="game-iframe-container" id="game-iframe-container">
+        <iframe
+          id="game-iframe"
+          src="./game-build/index.html"
+          title="Words Wonderland â€&ldquo; Play Online"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+          scrolling="no"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ STATS â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <div class="stats-strip">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <span class="stat-number">2</span>
+        <span class="stat-label">Game Modes</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Difficulty Levels</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Words & Sentences</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Kid-Friendly</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ FEATURES â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <section class="features" id="features">
+    <div class="features-header reveal">
+      <div class="section-label">Why Kids Love It</div>
+      <h2 class="section-title"
+        style="background:linear-gradient(135deg,#FFD700,#FF6B9D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+        Magical Features Built for Little Learners
+      </h2>
+      <p class="section-subtitle" style="margin:0 auto;">
+        Every element of Words Wonderland is thoughtfully designed to make typing practice feel like an enchanted
+        adventure.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#9000;</div>
+        <div class="feature-title">Typing Mastery</div>
+        <p class="feature-desc">Real-time typing feedback with letter-by-letter highlighting. Kids see each correct
+          keystroke rewarded instantly with glowing animations.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">ðŸ&ldquo;š</div>
+        <div class="feature-title">Rich Vocabulary</div>
+        <p class="feature-desc">Curated word lists and full sentences spanning age-appropriate topics â€&rdquo; from animals to
+          technology â€&rdquo; expanding knowledge as kids type.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">&#9201;</div>
+        <div class="feature-title">Timed Challenges</div>
+        <p class="feature-desc">Countdown timer builds focus and speed. Watch kids improve their words-per-minute as
+          they progress through the enchanted forest.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#127942;</div>
+        <div class="feature-title">Score & Combos</div>
+        <p class="feature-desc">Earn combo multipliers for fast, accurate streaks. The score system rewards both speed
+          and accuracy, keeping kids motivated to do better.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">&#127912;</div>
+        <div class="feature-title">Magical Art Style</div>
+        <p class="feature-desc">A hand-crafted fantasy world with pink stone arches, sparkle effects, friendly
+          butterflies, and glowing hummingbirds. Pure visual delight.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">ðŸ&rdquo;Š</div>
+        <div class="feature-title">Fun Sound Effects</div>
+        <p class="feature-desc">Whimsical audio feedback for every keypress, combo, and level complete. Immersive,
+          cheerful sound design tuned for young players.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ GAME MODES â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <section class="modes" id="modes">
+    <div class="modes-header reveal">
+      <div class="section-label">Two Ways to Play</div>
+      <h2 class="section-title" style="color:#fff;">
+        Choose Your <span
+          style="background:linear-gradient(135deg,#FFD700,#FF6B9D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Adventure</span>
+      </h2>
+      <p class="section-subtitle" style="margin:0 auto;">
+        Whether building individual words or mastering complete sentences, there's a perfect mode for every young
+        learner.
+      </p>
+    </div>
+
+    <div class="modes-grid">
+      <!-- Words Mode -->
+      <div class="mode-card mode-words reveal">
+        <div class="mode-badge">ðŸ&rdquo;¤ Mode 1</div>
+        <div class="mode-title">Words Play</div>
+        <p class="mode-desc">
+          Type individual vocabulary words as they appear on the magical stone stage. Perfect for beginners building
+          finger confidence and spelling skills.
+        </p>
+        <ul class="mode-perks">
+          <li>
+            <div class="perk-dot"></div> Single words, clear and focused
+          </li>
+          <li>
+            <div class="perk-dot"></div> Letter-by-letter live feedback
+          </li>
+          <li>
+            <div class="perk-dot"></div> Builds spelling accuracy
+          </li>
+          <li>
+            <div class="perk-dot"></div> Great for ages 5 and up
+          </li>
+        </ul>
+        <div class="mode-decoration">ðŸ&rdquo;¤</div>
+      </div>
+
+      <!-- Sentences Mode -->
+      <div class="mode-card mode-sentences reveal reveal-delay-2">
+        <div class="mode-badge">ðŸ&ldquo;– Mode 2</div>
+        <div class="mode-title">Sentences Play</div>
+        <p class="mode-desc">
+          Type complete sentences with punctuation and spaces. A step-up challenge that improves reading comprehension
+          and builds real typing fluency.
+        </p>
+        <ul class="mode-perks">
+          <li>
+            <div class="perk-dot"></div> Full phrases and sentences
+          </li>
+          <li>
+            <div class="perk-dot"></div> Includes punctuation & spaces
+          </li>
+          <li>
+            <div class="perk-dot"></div> Builds reading + typing together
+          </li>
+          <li>
+            <div class="perk-dot"></div> Ideal for ages 8 and up
+          </li>
+        </ul>
+        <div class="mode-decoration">ðŸ&ldquo;–</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ LEVELS â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <section class="levels" id="levels">
+    <div class="levels-header reveal">
+      <div class="section-label">Difficulty Levels</div>
+      <h2 class="section-title" style="color:#fff;">
+        Journey Through the <span
+          style="background:linear-gradient(135deg,#2ECC71,#FFD700,#C39BD3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Wonderland</span>
+      </h2>
+      <p class="section-subtitle" style="margin:0 auto;">
+        Three beautifully themed worlds, each with increasing challenge. Start in the gentle grove and conquer the
+        mighty mountains!
+      </p>
+    </div>
+
+    <div class="levels-row">
+      <div class="level-card level-easy reveal">
+        <div class="level-emblem">&#127807;</div>
+        <div class="level-name">Easy Grove</div>
+        <div class="level-sub">Beginner</div>
+        <p class="level-desc">Simple 3-4 letter words in a peaceful magical garden. Perfect for first-time typers
+          building their confidence.</p>
+        <span class="level-tag">Start Here!</span>
+      </div>
+
+      <div class="level-card level-medium reveal reveal-delay-1">
+        <div class="level-emblem">&#127794;</div>
+        <div class="level-name">Medium Woods</div>
+        <div class="level-sub">Intermediate</div>
+        <p class="level-desc">Longer words and faster timers deep in the enchanted forest. A great challenge for growing
+          typists.</p>
+        <span class="level-tag">&#11088; Most Popular</span>
+      </div>
+
+      <div class="level-card level-hard reveal reveal-delay-2">
+        <div class="level-emblem">&#9968;</div>
+        <div class="level-name">Hard Mountains</div>
+        <div class="level-sub">Advanced</div>
+        <p class="level-desc">Complex words, full sentences, and tight timing high in the magical peaks. For typing
+          champions only!</p>
+        <span class="level-tag">Challenge Mode</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ CHARACTERS â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <section class="characters">
+    <div class="characters-inner reveal">
+      <div>
+        <div class="section-label">Meet the Gang</div>
+        <h2 class="section-title" style="color:#fff;">
+          Your <span style="color:#FFD700;">Magical</span> Companions
+        </h2>
+        <p style="font-size:1rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-top:14px;">
+          Ollie the Owl, Penny the Penguin, and Felix the Fox cheer you on through every keystroke. These adorable
+          friends celebrate your victories and encourage you when things get tough â€&rdquo; because every adventurer needs a
+          great team!
+        </p>
+        <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;">
+          <div
+            style="padding:8px 20px;border-radius:20px;background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.25);font-size:0.85rem;font-weight:700;color:#FFD700;">
+            &#129497; Wisdom Guide</div>
+          <div
+            style="padding:8px 20px;border-radius:20px;background:rgba(135,206,235,0.12);border:1px solid rgba(135,206,235,0.25);font-size:0.85rem;font-weight:700;color:#87CEEB;">
+            &#128039; Speedy Helper</div>
+          <div
+            style="padding:8px 20px;border-radius:20px;background:rgba(255,140,66,0.12);border:1px solid rgba(255,140,66,0.25);font-size:0.85rem;font-weight:700;color:#FF8C42;">
+            &#129418; Cheerleader</div>
+        </div>
+      </div>
+
+      <div class="char-showcase">
+        <div class="char-card">
+          <span class="char-emoji">&#129497;</span>
+          <div class="char-name">Ollie</div>
+          <div class="char-role">The Wise Owl</div>
+        </div>
+        <div class="char-card" style="margin-top:30px;">
+          <span class="char-emoji">&#128039;</span>
+          <div class="char-name">Penny</div>
+          <div class="char-role">Speed Penguin</div>
+        </div>
+        <div class="char-card">
+          <span class="char-emoji">&#129418;</span>
+          <div class="char-name">Felix</div>
+          <div class="char-role">The Fox</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ DEVELOPER â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <section class="developer" id="developer">
+    <div class="developer-inner reveal">
+      <div class="dev-avatar">&#128104;&#8205;&#128187;</div>
+      <div class="dev-name">Praveen Leo</div>
+      <div class="dev-role">Indie Game Developer & UI/UX Designer</div>
+      <p class="dev-quote">
+        "I built Words Wonderland to make learning feel like magic. Every pixel, every sparkle, every adorable character
+        â€&rdquo; crafted with love to spark a child's joy for language and typing."
+      </p>
+      <div class="dev-tags">
+        <span class="dev-tag">&#127918; Unity Engine</span>
+        <span class="dev-tag">&#127912; 2D Art Direction</span>
+        <span class="dev-tag">&#9999; UI/UX Design</span>
+        <span class="dev-tag">ðŸ&ldquo;š Educational Design</span>
+        <span class="dev-tag">&#128640; Indie Developer</span>
+      </div>
+      <a href="https://praveenleo.vercel.app" target="_blank" rel="noopener" class="portfolio-btn">
+        <span class="port-icon">&#127760;</span>
+        View Portfolio &rarr; praveenleo.vercel.app
+      </a>
+    </div>
+  </section>
+
+  <!-- game-section moved above hero -->
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ WEBGL MODAL â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <div class="webgl-modal-overlay" id="webgl-overlay">
+    <div class="webgl-modal">
+      <div class="webgl-modal-header">
+        <div class="webgl-modal-title">&#10024; Words Wonderland â€&rdquo; Play Online</div>
+        <button class="webgl-close-btn" id="webgl-close" aria-label="Close">&#10005;</button>
+      </div>
+      <div class="webgl-frame-wrap">
+        <div class="webgl-loading" id="webgl-loading">
+          <div class="webgl-loading-ring"></div>
+          <p>Loading gameâ€¦</p>
+        </div>
+        <iframe id="webgl-iframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- â&rdquo;€â&rdquo;€â&rdquo;€ FOOTER â&rdquo;€â&rdquo;€â&rdquo;€ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">&#10024; Words Wonderland</div>
+      <ul class="footer-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#modes">Game Modes</a></li>
+        <li><a href="#levels">Levels</a></li>
+        <li><a href="#developer">Developer</a></li>
+      </ul>
+      <div class="footer-copy">Â&copy; 2025 Praveen Leo. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ SPARKLE CANVAS â&rdquo;€â&rdquo;€â&rdquo;€ */
+    const canvas = document.getElementById('sparkle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x || Math.random() * canvas.width;
+        this.y = y || Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = -Math.random() * 0.6 - 0.2;
+        this.life = 1;
+        this.decay = Math.random() * 0.008 + 0.003;
+        const colors = ['#FFD700', '#FF6B9D', '#C39BD3', '#87CEEB', '#2ECC71', '#FF8C42'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy; this.life -= this.decay;
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.life * 0.6;
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 8; ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function spawnParticles() {
+      if (Math.random() < 0.3) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      spawnParticles();
+      particles = particles.filter(p => p.life > 0);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateCanvas);
+    }
+
+    animateCanvas();
+
+    /* mouse sparkle burst */
+    document.addEventListener('mousemove', (e) => {
+      if (Math.random() < 0.15) {
+        for (let i = 0; i < 2; i++) {
+          const p = new Particle(e.clientX + (Math.random() - 0.5) * 20, e.clientY + (Math.random() - 0.5) * 20);
+          p.size = Math.random() * 3 + 1;
+          p.decay = 0.02;
+          particles.push(p);
+        }
+      }
+    });
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ SCROLL REVEAL â&rdquo;€â&rdquo;€â&rdquo;€ */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ ANIMATED LETTER CYCLING â&rdquo;€â&rdquo;€â&rdquo;€ */
+    const letters = ['W', 'O', 'N', 'D', 'E', 'R'];
+    const boxes = document.querySelectorAll('.letter-box');
+    let idx = 0;
+
+    setInterval(() => {
+      idx = (idx + 1) % (letters.length + 1);
+      boxes.forEach((box, i) => {
+        box.className = 'letter-box';
+        if (i < idx) box.classList.add('typed');
+        else if (i === idx) box.classList.add('current');
+        else box.classList.add('upcoming');
+      });
+      if (idx >= letters.length) idx = -1;
+    }, 500);
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ SCORE COUNTER â&rdquo;€â&rdquo;€â&rdquo;€ */
+    let score = 320;
+    const scorePill = document.querySelector('.stat-pill:nth-child(2)');
+    setInterval(() => {
+      score += Math.floor(Math.random() * 20 + 5);
+      if (scorePill) scorePill.textContent = `&#127775; Score: ${score}`;
+    }, 1500);
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ TIMER COUNTDOWN â&rdquo;€â&rdquo;€â&rdquo;€ */
+    let seconds = 45;
+    const timerPill = document.querySelector('.stat-pill:first-child');
+    setInterval(() => {
+      seconds = seconds > 0 ? seconds - 1 : 59;
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      if (timerPill) timerPill.textContent = `&#9201; 0${m}:${s}`;
+    }, 1000);
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ SMOOTH NAV â&rdquo;€â&rdquo;€â&rdquo;€ */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ PLAY ONLINE &rarr; reveal + scroll to #game-section â&rdquo;€â&rdquo;€â&rdquo;€ */
+    const gameSection = document.getElementById('game-section');
+    let gameOpened = false;
+
+    function openGame() {
+      if (!gameOpened) {
+        // First open: scale iframe then reveal
+        scaleGameIframe();
+        gameOpened = true;
+      }
+      // Toggle open class for smooth animation
+      gameSection.classList.add('game-open');
+      // After animation starts, scroll smoothly so top of section is just below nav
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const navH = 70;
+          const top = gameSection.getBoundingClientRect().top + window.scrollY - navH;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      });
+    }
+
+    document.getElementById('hero-play-btn').addEventListener('click', openGame);
+    // nav-play-btn is now an external <a> link to itch.io â€&rdquo; no JS listener needed
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ GAME IFRAME SCALE â&rdquo;€â&rdquo;€â&rdquo;€
+       Unity renders at native 1920Ã&mdash;1080. We CSS-transform scale the iframe
+       to exactly fill the container width while keeping 16:9 aspect ratio.
+    */
+    const GAME_W = 1920, GAME_H = 1080;
+    const gameIframeEl    = document.getElementById('game-iframe');
+    const gameContainerEl = document.getElementById('game-iframe-container');
+
+    function scaleGameIframe() {
+      if (!gameContainerEl || !gameIframeEl) return;
+
+      const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+
+      if (isFullscreen) {
+        // In fullscreen: scale to fit the real screen, letterbox if needed
+        const sw = window.screen.width;
+        const sh = window.screen.height;
+        const scale = Math.min(sw / GAME_W, sh / GAME_H);
+        const scaledW = Math.round(GAME_W * scale);
+        const scaledH = Math.round(GAME_H * scale);
+        // Centre the scaled iframe inside the fullscreen container
+        const offsetX = Math.round((sw - scaledW) / 2);
+        const offsetY = Math.round((sh - scaledH) / 2);
+        gameIframeEl.style.transformOrigin = 'top left';
+        gameIframeEl.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        // Container height handled by :fullscreen CSS (100vh)
+      } else {
+        // Normal embedded mode: fit container width, maintain 16:9 height
+        const containerW = gameContainerEl.offsetWidth;
+        const scale = containerW / GAME_W;
+        const scaledH = Math.round(GAME_H * scale);
+        gameContainerEl.style.height = scaledH + 'px';
+        gameIframeEl.style.transformOrigin = 'top left';
+        gameIframeEl.style.transform = `scale(${scale})`;
+      }
+    }
+    scaleGameIframe();
+    window.addEventListener('resize', scaleGameIframe);
+    document.addEventListener('fullscreenchange', scaleGameIframe);
+    document.addEventListener('webkitfullscreenchange', scaleGameIframe);
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ FULLSCREEN â&rdquo;€â&rdquo;€â&rdquo;€ */
+    document.getElementById('game-fullscreen-btn').addEventListener('click', () => {
+      // Fullscreen the CONTAINER (not the iframe) so the CSS scale transform
+      // is recalculated cleanly against the real screen dimensions
+      if (gameContainerEl.requestFullscreen) gameContainerEl.requestFullscreen();
+      else if (gameContainerEl.webkitRequestFullscreen) gameContainerEl.webkitRequestFullscreen();
+    });
+
+    /* â&rdquo;€â&rdquo;€â&rdquo;€ WEBGL MODAL (close only) â&rdquo;€â&rdquo;€â&rdquo;€ */
+    function closeWebGL() {
+      document.getElementById('webgl-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      document.getElementById('webgl-iframe').src = '';
+    }
+    document.getElementById('webgl-close').addEventListener('click', closeWebGL);
+    document.getElementById('webgl-overlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeWebGL();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeWebGL();
+    });
+  </script>
+</body>
+
+</html>
